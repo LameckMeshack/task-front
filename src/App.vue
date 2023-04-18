@@ -1,18 +1,10 @@
 <template>
-  <h1 class="bg-blue-900 text-white p-4">Hello</h1>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
-
 <script>
-export default {};
+export default {
+  name: "App",
+};
 </script>
-
-<style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
-</style>
