@@ -33,31 +33,11 @@ const store = createStore({
     toggleSidebar(context) {
       context.commit("toggleSidebar");
     },
-    async login({ commit }, loginData) {
-      try {
-        // Make an API call to authenticate the user
-        const response = await AuthServices.login(loginData);
-        const user = response.data;
-
-        // Update the state with the authenticated user
-        commit("login", user);
-      } catch (error) {
-        // Handle login error
-        console.error(error);
-      }
+    login({ commit }, user) {
+      commit("login", user);
     },
-    async register({ commit }, regData) {
-      try {
-        // Make an API call to register the user
-        const response = await AuthServices.register(regData);
-        const user = response.data;
-
-        // Update the state with the authenticated user
-        commit("register", user);
-      } catch (error) {
-        // Handle register error
-        console.error(error);
-      }
+    register({ commit }, user) {
+      commit("register", user);
     },
 
     async logout({ commit }) {
