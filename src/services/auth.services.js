@@ -1,7 +1,7 @@
-import  http  from "../http-common";
-
+import http from "../http-common";
+import authHeader from "./auth-header";
 // login
-const login = (loginData) => {
+const login = async (loginData) => {
   return http.post("/login", loginData);
 };
 
@@ -17,7 +17,7 @@ const register = (regData) => {
 
 // get user
 const getUser = () => {
-  return http.get("/user");
+  return http.get("/user", { headers: authHeader() });
 };
 
 const AuthServices = {
