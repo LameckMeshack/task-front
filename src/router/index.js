@@ -1,23 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from "@/components/Dashboard";
-import DashboardHome from "@/pages/Home";
-import Graph from "@/pages/Graphs";
-import Login from "@/pages/Login";
+const Login = () => import("@/pages/Login");
+const Dashboard = () => import("@/components/Dashboard");
+const DashboardHome = () => import("@/pages/Home");
+const Graph = () => import("@/pages/Graphs");
+const CreateTask = () => import("@/pages/CreateTask");
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
   {
     path: "/",
     component: Dashboard,
-    props: true,
+
     children: [
       {
         path: "/",
         name: "DashboardHome",
         component: DashboardHome,
-        props: true,
       },
-      { path: "analytics", name: "Graph", component: Graph, props: true },
+      { path: "analytics", name: "Graph", component: Graph },
+      { path: "create-task", name: "create", component: CreateTask },
     ],
   },
 ];

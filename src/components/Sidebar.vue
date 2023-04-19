@@ -39,11 +39,11 @@
           ></path>
         </svg>
         <!-- <span class="text-gray-700">Analytics</span> -->
-        <!-- <router-link :to="{ name: 'Graph' }" class="text-gray-700"
+        <router-link :to="{ name: 'Graph' }" class="text-gray-700"
           >Analytics</router-link
-        > -->
+        >
         <!-- <a :href="$router.resolve({ name: 'Graph' }).href">Analytics</a> -->
-        <a href="/analytics">Analytics</a>
+        <!-- <a href="/analytics">Analytics</a> -->
       </div>
       <div
         class="w-full flex items-center text-blue-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer"
