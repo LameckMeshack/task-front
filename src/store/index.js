@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-import AuthServices from "@/services/auth.services";
 
 const store = createStore({
   state: {
@@ -40,17 +39,8 @@ const store = createStore({
       commit("register", user);
     },
 
-    async logout({ commit }) {
-      try {
-        // Make an API call to logout the user
-        await AuthServices.logout();
-
-        // Update the state with the authenticated user
-        commit("logout");
-      } catch (error) {
-        // Handle logout error
-        console.error(error);
-      }
+    logout({ commit }) {
+      commit("logout");
     },
   },
 });

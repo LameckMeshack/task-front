@@ -68,29 +68,16 @@
             d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"
           />
         </svg>
-        <!-- <img
-          src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
-          class="w-12 h-12 rounded-full shadow-lg"
-          @click="dropDownOpen = !dropDownOpen"
-        /> -->
-        <h4 @click="dropDownOpen = !dropDownOpen">User</h4>
+
+        <!-- <button @click="onLogout">Logout</button> -->
+      <a href='/login'> <button @click="onLogout">Logout</button></a> 
       </div>
     </div>
-
-    <!-- dropdown menu -->
-    <div
-      class="absolute bg-gray-100 border border-t-0 shadow-xl text-gray-700 rounded-b-lg w-48 bottom-10 right-0 mr-6"
-      :class="dropDownOpen ? '' : 'hidden'"
-    >
-      <!-- <a href="#" class="block px-4 py-2 hover:bg-gray-200">Account</a>-->
-      <a href="#" class="block px-4 py-2 hover:bg-gray-200">Settings</a>
-      <a href="#" class="block px-4 py-2 hover:bg-gray-200">Logout</a>
-    </div>
-    <!-- dropdown menu end -->
   </div>
 </template>
 
 <script>
+import AuthServices from "@/services/auth.services";
 import { mapState } from "vuex";
 
 export default {
@@ -101,11 +88,25 @@ export default {
   data() {
     return {
       dropDownOpen: false,
+      msg: "",
     };
   },
   methods: {
     toggleSidebar() {
       this.$store.dispatch("toggleSidebar");
+    },
+    async onLogout() {
+      try {
+        console.log("logout");
+        AuthServices.logout;
+        // Call the logout mutation on the store
+        this.$store.dispatch("logout");
+        localStorage.removeItem("token");
+        this.$router.push("/login");
+      } catch (error) {
+        this.msg = error.response.data.message;
+        alert(this.msg);
+      }
     },
   },
 };
