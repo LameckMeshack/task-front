@@ -16,7 +16,7 @@
           </svg>
         </li>
         <li class="flex items-center">
-          <a href="#" class="text-gray-600">Dashboard</a>
+          <a href="#" class="text-gray-600">Analytics</a>
         </li>
       </ol>
     </nav>
@@ -115,7 +115,7 @@
 
     <div class="flex flex-wrap -mx-3">
       <div class="w-full xl:w-1/3 px-3">
-        <p class="text-xl font-semibold mb-4">Recent Sales</p>
+        <p class="text-xl font-semibold mb-4">Recent Tasks</p>
 
         <div class="w-full bg-white border rounded-lg p-4 mb-8 xl:mb-0">
           <canvas id="buyers-chart" width="600" height="400"></canvas>
@@ -123,7 +123,7 @@
       </div>
 
       <div class="w-full xl:w-1/3 px-3">
-        <p class="text-xl font-semibold mb-4">Recent Reviews</p>
+        <p class="text-xl font-semibold mb-4">Recent Remarks</p>
 
         <div class="w-full bg-white border rounded-lg p-4 mb-8 xl:mb-0">
           <canvas id="reviews-chart" width="600" height="400"></canvas>
@@ -131,16 +131,16 @@
       </div>
 
       <div class="w-full xl:w-1/3 px-3">
-        <p class="text-xl font-semibold mb-4">Recent Transactions</p>
+        <p class="text-xl font-semibold mb-4">Todays Tasks</p>
         <div class="w-full bg-white border rounded-lg p-4">
           <div
             class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4"
           >
             <div>
               <p class="font-semibold text-xl">Trent Murphy</p>
-              <p>Product 1</p>
+              <p>Task One</p>
             </div>
-            <span class="text-green-500 font-semibold text-lg">$25.00</span>
+            <span class="text-green-500 font-semibold text-lg">12:00</span>
           </div>
 
           <div
@@ -148,9 +148,9 @@
           >
             <div>
               <p class="font-semibold text-xl">Joseph Brent</p>
-              <p>Product 34</p>
+              <p>Task Two</p>
             </div>
-            <span class="text-red-500 font-semibold text-lg">$74.99</span>
+            <span class="text-red-500 font-semibold text-lg">09:00</span>
           </div>
 
           <div
@@ -158,9 +158,9 @@
           >
             <div>
               <p class="font-semibold text-xl">Jacob Bator</p>
-              <p>Product 23</p>
+              <p>Task Three</p>
             </div>
-            <span class="text-green-500 font-semibold text-lg">$14.95</span>
+            <span class="text-green-500 font-semibold text-lg">14.95</span>
           </div>
 
           <div
@@ -168,9 +168,9 @@
           >
             <div>
               <p class="font-semibold text-xl">Alex Mason</p>
-              <p>Product 66</p>
+              <p>Task One</p>
             </div>
-            <span class="text-green-500 font-semibold text-lg">$44.99</span>
+            <span class="text-green-500 font-semibold text-lg">Cancelled</span>
           </div>
         </div>
       </div>

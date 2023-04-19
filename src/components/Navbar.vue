@@ -28,7 +28,7 @@
           <input
             type="search"
             name="serch"
-            placeholder="Search products..."
+            placeholder="Search ..."
             class="bg-white h-10 w-full xl:w-64 px-5 rounded-lg border text-sm focus:outline-none"
           />
           <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
@@ -68,11 +68,12 @@
             d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"
           />
         </svg>
-        <img
+        <!-- <img
           src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
           class="w-12 h-12 rounded-full shadow-lg"
           @click="dropDownOpen = !dropDownOpen"
-        />
+        /> -->
+        <h4 @click="dropDownOpen = !dropDownOpen">User</h4>
       </div>
     </div>
 
@@ -81,7 +82,7 @@
       class="absolute bg-gray-100 border border-t-0 shadow-xl text-gray-700 rounded-b-lg w-48 bottom-10 right-0 mr-6"
       :class="dropDownOpen ? '' : 'hidden'"
     >
-      <a href="#" class="block px-4 py-2 hover:bg-gray-200">Account</a>
+      <!-- <a href="#" class="block px-4 py-2 hover:bg-gray-200">Account</a>-->
       <a href="#" class="block px-4 py-2 hover:bg-gray-200">Settings</a>
       <a href="#" class="block px-4 py-2 hover:bg-gray-200">Logout</a>
     </div>
