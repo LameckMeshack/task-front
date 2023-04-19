@@ -39,8 +39,16 @@
               required
               class="block w-full px-4 py-2 mt-2 bg-blue-200 border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
-            <ErrorMessage class="text-red-600 text-xs" name="password" />
+            <div>
+              <error
+                v-if="error"
+                :msg="msg"
+                :error="error"
+                @close="setError(false)"
+              />
+            </div>
           </div>
+          <error v-if="error" :msg="msg" />
           <a href="#" class="text-xs text-gray-600 hover:underline"
             >Forget Password?</a
           >
@@ -64,15 +72,20 @@
 </template>
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
+import AuthServices from "@/services/auth.services";
+import Error from "@/components/Error.vue";
 export default {
   name: "LoginView",
   components: {
     Form,
     Field,
     ErrorMessage,
+    Error,
   },
   data() {
     return {
+      msg: "",
+      error: false,
       loginData: {
         email: "",
         password: "",
@@ -80,6 +93,9 @@ export default {
     };
   },
   methods: {
+    setError(value) {
+      this.error = value;
+    },
     validateEmail(value) {
       // if the field is empty
       if (!value) {
@@ -102,17 +118,23 @@ export default {
       }
       return true;
     },
-    // login() {
-    //   //verify inputs
-    //   if (!this.loginData.email || !this.loginData.password) {
-    //     alert("Add all inputs");
-    //     return;
-    //   }
+  
+    async onSubmit(values) {
+      try {
+        //chnge email property in values to email_address
+        values.email_address = values.email;
+        delete values.email;
 
-    //   this.$store.dispatch("login", this.loginData);
-    // },
-    onSubmit(values) {
-      this.$store.dispatch("login", values);
+        const res = await AuthServices.login(values);
+        //storw token in local storage
+        localStorage.setItem("token", res.data.data.token);
+        this.$store.commit("login", values.email_address);
+
+        this.$router.push("/");
+      } catch (error) {
+        this.error = true;
+        this.msg = error.response.data.message;
+      }
     },
   },
 };
