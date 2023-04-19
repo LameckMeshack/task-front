@@ -2,8 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "@/components/Dashboard";
 import DashboardHome from "@/pages/Home";
 import Graph from "@/pages/Graphs";
+import Login from "@/pages/Login";
 
 const routes = [
+  { path: "/login", name: "Login", component: Login },
   // { path: "/", redirect: { name: "DashboardHome" } },
   {
     path: "/",

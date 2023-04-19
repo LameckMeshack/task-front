@@ -20,6 +20,8 @@
           <label for="email" class="block text-sm text-gray-800">Email</label>
           <input
             type="email"
+            v-model="loginData.email"
+            required
             class="block w-full px-4 py-2 mt-2 bg-blue-600 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           />
         </div>
@@ -30,6 +32,8 @@
             >
             <input
               type="password"
+              v-model="loginData.password"
+              required
               class="block w-full px-4 py-2 mt-2 bg-blue-600 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
@@ -38,6 +42,7 @@
           >
           <div class="mt-6">
             <button
+              @click.prevent="login()"
               class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
             >
               Login
@@ -59,16 +64,21 @@ export default {
   name: "LoginView",
   data() {
     return {
-      email: "",
-      password: "",
+      loginData: {
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {
     login() {
-      this.$store.dispatch("login", {
-        email: this.email,
-        password: this.password,
-      });
+      //verify inputs
+      if (!this.loginData.email || !this.loginData.password) {
+        alert("Add all inputs");
+        return;
+      }
+
+      this.$store.dispatch("login", this.loginData);
     },
   },
 };
