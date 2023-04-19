@@ -3,17 +3,22 @@ import Dashboard from "@/components/Dashboard";
 import DashboardHome from "@/pages/Home";
 import Graph from "@/pages/Graphs";
 
-
 const routes = [
-  { path: "/", redirect: { name: "DashboardHome" } },
+  // { path: "/", redirect: { name: "DashboardHome" } },
   {
-    path: "/dashboard",
+    path: "/",
     component: Dashboard,
+    props: true,
     children: [
-      { path: "/", redirect: { name: "DashboardHome" } },
-      { path: "home", name: "DashboardHome", component: DashboardHome },
-      { path: "analytics", name: "Graph", component: Graph },
-
+      // { path: "/", redirect: { name: "DashboardHome" } },
+      {
+        path: "/",
+        name: "DashboardHome",
+        component: DashboardHome,
+        props: true,
+      },
+      // { path: "home", name: "DashboardHome", component: DashboardHome },
+      { path: "analytics", name: "Graph", component: Graph, props: true },
     ],
   },
 ];

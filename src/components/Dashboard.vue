@@ -9,7 +9,7 @@
         <Navbar />
 
         <div class="p-6 bg-gray-100 mb-20">
-          <router-view />
+          <router-view :key="$route.path"/>
         </div>
 
         <Footer />
