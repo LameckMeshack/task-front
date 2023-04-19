@@ -118,7 +118,7 @@ export default {
       }
       return true;
     },
-  
+
     async onSubmit(values) {
       try {
         //chnge email property in values to email_address
@@ -136,6 +136,12 @@ export default {
         this.msg = error.response.data.message;
       }
     },
+  },
+  mounted() {
+    let token = localStorage.getItem("token");
+    if (token) {
+      this.$router.push("/");
+    }
   },
 };
 </script>
