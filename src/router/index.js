@@ -6,20 +6,17 @@ import Login from "@/pages/Login";
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
-  // { path: "/", redirect: { name: "DashboardHome" } },
   {
     path: "/",
     component: Dashboard,
     props: true,
     children: [
-      // { path: "/", redirect: { name: "DashboardHome" } },
       {
         path: "/",
         name: "DashboardHome",
         component: DashboardHome,
         props: true,
       },
-      // { path: "home", name: "DashboardHome", component: DashboardHome },
       { path: "analytics", name: "Graph", component: Graph, props: true },
     ],
   },
