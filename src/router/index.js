@@ -18,7 +18,7 @@ const routes = [
         component: DashboardHome,
       },
       { path: "analytics", name: "Graph", component: Graph },
-      { path: "create-task", name: "create", component: CreateTask },
+      { path: "create-task", name: "Create", component: CreateTask },
     ],
   },
 ];
