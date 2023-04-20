@@ -4,6 +4,7 @@ const Dashboard = () => import("@/components/Dashboard");
 const DashboardHome = () => import("@/pages/Home");
 const Graph = () => import("@/pages/Graphs");
 const CreateTask = () => import("@/pages/CreateTask");
+const UpdateTask = () => import("@/pages/UpdateTask");
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
@@ -19,6 +20,8 @@ const routes = [
       },
       { path: "analytics", name: "Graph", component: Graph },
       { path: "create-task", name: "Create", component: CreateTask },
+      //with params
+      { path: "update-task/:id", name: "Task", component: UpdateTask },
     ],
   },
 ];
