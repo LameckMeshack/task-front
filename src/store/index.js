@@ -1,3 +1,4 @@
+import TaskService from "@/services/task.service";
 import { createStore } from "vuex";
 
 const store = createStore({
@@ -5,12 +6,9 @@ const store = createStore({
     sideBarOpen: false,
     isAuthenticated: false,
     user: null,
+    assignedTasks: null,
   },
-  getters: {
-    sideBarOpen: (state) => {
-      return state.sideBarOpen;
-    },
-  },
+
   mutations: {
     toggleSidebar(state) {
       state.sideBarOpen = !state.sideBarOpen;
@@ -27,6 +25,10 @@ const store = createStore({
       state.isAuthenticated = false;
       state.user = null;
     },
+    //task
+    SET_ASSIGNED_TASK(state, tasks) {
+      state.assignedTasks = [...tasks];
+    },
   },
   actions: {
     toggleSidebar(context) {
@@ -38,9 +40,28 @@ const store = createStore({
     register({ commit }, user) {
       commit("register", user);
     },
-
     logout({ commit }) {
       commit("logout");
+    },
+
+    async getAssignedTasks({ commit }) {
+      try {
+        const response = await TaskService.getAssignedTasks();
+        const tasks = response.data.data;
+        commit("SET_ASSIGNED_TASK", tasks);
+        console.log(this.state.assignedTasks,"Commit succesfull")
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+
+  getters: {
+    assignedTasks(state) {
+      return state.assignedTasks;
+    },
+    sideBarOpen: (state) => {
+      return state.sideBarOpen;
     },
   },
 });
