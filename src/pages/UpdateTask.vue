@@ -1,10 +1,11 @@
 <template>
+  <h1 class="text-2xl mx-auto">Create Task</h1>
   <form>
     <div class="mb-4 mx-auto px-2 w-6/12">
       <label class="block mb-1 text-sm" for="input2">Task Name</label>
 
       <input
-        v-model="task.name"
+        v-model="taskEdit.name"
         id="input2"
         class="w-full border px-4 py-2 rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none"
         type="text"
@@ -18,7 +19,7 @@
           <select
             class="w-full border bg-white px-4 pr-8 py-2 rounded focus:border-blue-200 focus:shadow-outline outline-none appearance-none"
             id="select-item"
-            v-model="task.status_id"
+            v-model="taskEdit.status_id"
           >
             <option value="1">Not Start</option>
             <option value="2">In Progress</option>
@@ -44,7 +45,10 @@
       <div class="mb-4 mx-auto pl-2 w-6/12">
         <label class="block mb-1 text-sm" for="select-item">Due Date</label>
         <div class="relative">
-          <VueDatePicker class="pb-2" v-model="task.due_date"></VueDatePicker>
+          <VueDatePicker
+            class="pb-2"
+            v-model="taskEdit.due_date"
+          ></VueDatePicker>
         </div>
       </div>
     </div>
@@ -54,7 +58,7 @@
 
       <textarea
         id="textarea1"
-        v-model="task.description"
+        v-model="taskEdit.description"
         class="w-full border px-4 py-2 rounded focus:border-blue-500 focus:shadow-outline outline-none"
         rows="5"
         placeholder="Task Description..."
@@ -67,7 +71,7 @@
         class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         type="button"
       >
-        Create Task
+        Update Task
       </button>
     </div>
   </form>
@@ -80,6 +84,7 @@
     />
 
     <error v-if="error" :msg="msg" :error="error" @close="setError(false)" />
+    {{ taskEdit }}
   </div>
 </template>
 <script>
@@ -88,15 +93,17 @@ import "@vuepic/vue-datepicker/dist/main.css";
 import TaskServices from "../services/task.service";
 import Success from "@/components/Success.vue";
 import Error from "@/components/Error.vue";
+import { mapState } from "vuex";
 export default {
   name: "ContactForm",
   components: { VueDatePicker, Success, Error },
+
   data() {
     return {
       success: false,
       error: false,
       msg: "",
-      task: {
+      taskEdit: {
         name: "",
         description: "",
         status_id: "",
@@ -109,7 +116,7 @@ export default {
       this.success = value;
     },
     async onSubmit() {
-      const hasEmptyValue = Object.values(this.task).some(
+      const hasEmptyValue = Object.values(this.taskEdit).some(
         (value) => value === ""
       );
       if (hasEmptyValue) {
@@ -118,17 +125,18 @@ export default {
         return;
       }
       try {
-        //format due_date in task
-        this.task.due_date = new Date(this.task.due_date)
+        //format due_date in taskEdit
+        this.taskEdit.due_date = new Date(this.taskEdit.due_date)
           .toISOString()
           .replace("T", " ")
           .slice(0, -5);
-        const res = await TaskServices.create(this.task);
+        console.log(this.taskEdit);
+        const res = await TaskServices.update(this.taskEdit);
         this.success = true;
         this.error = false;
         this.msg = res.data.message;
         //reset form
-        this.task = {
+        this.taskEdit = {
           name: "",
           description: "",
           status_id: "",
@@ -139,6 +147,16 @@ export default {
         this.msg = "Something went wrong";
       }
     },
+  },
+  computed: {
+    ...mapState(["editData"]),
+    formData() {
+      return this.editData ? { ...this.editData } : {};
+    },
+  },
+  created() {
+    // assign the form data from the edit data
+    this.taskEdit = this.formData;
   },
 };
 </script>

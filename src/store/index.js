@@ -8,6 +8,7 @@ const store = createStore({
     user: null,
     assignedTasks: null,
     unAssignedTasks: null,
+    editData: null,
   },
 
   mutations: {
@@ -32,6 +33,9 @@ const store = createStore({
     },
     SET_UNASSIGNED_TASK(state, tasks) {
       state.unAssignedTasks = [...tasks];
+    },
+    SET_EDIT_DATA(state, task) {
+      state.editData = task;
     },
   },
   actions: {
@@ -68,6 +72,12 @@ const store = createStore({
       } catch (error) {
         console.error(error);
       }
+    },
+
+    //action that SET_EDIT_DATA
+
+    updateTask({ commit }, task) {
+      commit("SET_EDIT_DATA", task);
     },
   },
 

@@ -21,7 +21,12 @@ const routes = [
       { path: "analytics", name: "Graph", component: Graph },
       { path: "create-task", name: "Create", component: CreateTask },
       //with params
-      { path: "update-task/:id", name: "Task", component: UpdateTask },
+      {
+        path: "task/:id/edit",
+        name: "edit-task",
+        component: UpdateTask,
+        props: true,
+      },
     ],
   },
 ];

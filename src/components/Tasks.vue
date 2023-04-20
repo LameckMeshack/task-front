@@ -160,7 +160,7 @@
                   {{ task.status }}
                 </div>
               </td>
-              <td class="px-4 py-4">
+              <td v-if="!unassign" class="px-4 py-4">
                 <div
                   class="flex-col lg:flex-row lg:space-x-2 md:text-left text-center items-center space-y-2 lg:space-y-0"
                 >
@@ -181,6 +181,50 @@
                       />
                     </svg>
                   </button>
+
+                  <button
+                    class="items-center px-2 py-2 text-white bg-red-500 dark:bg-gray-500 rounded-md hover:bg-red-600 dark:hover:bg-gray-600 focus:outline-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+              <td v-else class="px-4 py-4">
+                <div
+                  @click="updateTask(task)"
+                  class="flex-col lg:flex-row lg:space-x-2 md:text-left text-center items-center space-y-2 lg:space-y-0"
+                >
+                  <button
+                    class="items-center px-2 py-2 text-white bg-blue-500 dark:bg-gray-500 rounded-md hover:bg-blue-600 dark:hover:bg-gray-600 focus:outline-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                      <path
+                        fill-rule="evenodd"
+                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+
                   <button
                     class="items-center px-2 py-2 text-white bg-red-500 dark:bg-gray-500 rounded-md hover:bg-red-600 dark:hover:bg-gray-600 focus:outline-none"
                   >
@@ -209,6 +253,7 @@
   </div>
 </template>
 <script>
+import router from "@/router";
 import { mapGetters } from "vuex";
 export default {
   name: "TaskTable",
@@ -221,7 +266,19 @@ export default {
   computed: {
     ...mapGetters(["assignedTasks", "unAssignedTasks"]),
   },
-  methods: {},
+  methods: {
+    updateTask(task) {
+      router.push({
+        name: "edit-task",
+        params: { id: task.id },
+        props: { task },
+      });
+      //action to update task
+
+      this.$store.dispatch("updateTask", task);
+    },
+  },
+
   watch: {
     assignedTasks(newTasks) {
       this.tasks = newTasks;
