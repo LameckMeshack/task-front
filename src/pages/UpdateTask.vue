@@ -84,7 +84,6 @@
     />
 
     <error v-if="error" :msg="msg" :error="error" @close="setError(false)" />
-    {{ taskEdit }}
   </div>
 </template>
 <script>
@@ -130,21 +129,21 @@ export default {
           .toISOString()
           .replace("T", " ")
           .slice(0, -5);
+
         console.log(this.taskEdit);
-        const res = await TaskServices.update(this.taskEdit);
+        const res = await TaskServices.update(this.taskEdit.id, this.taskEdit);
         this.success = true;
         this.error = false;
         this.msg = res.data.message;
-        //reset form
-        this.taskEdit = {
-          name: "",
-          description: "",
-          status_id: "",
-          due_date: "",
-        };
+        // redirect
+        this.$router.push({ name: "DashboardHome" });
       } catch (error) {
+        console.log(error, "error");
         this.error = true;
-        this.msg = "Something went wrong";
+        this.msg = Object.values(error.response.data.data)[0][0];
+        if(!this.msg){
+          this.msg = error.response.data.message + "Something went wrong"
+        }
       }
     },
   },
