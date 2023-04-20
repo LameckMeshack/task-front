@@ -5,6 +5,10 @@ const getAll = () => {
   return http.get("/tasks", { headers: authHeader() });
 };
 
+const getAssignedTasks = () => {
+  return http.get("/usertasks", { headers: authHeader() });
+};
+
 const get = (id) => {
   return http.get(`/tasks/${id}`, { headers: authHeader() });
 };
@@ -27,6 +31,7 @@ const removeAll = () => {
 
 const TaskService = {
   getAll,
+  getAssignedTasks,
   get,
   create,
   update,

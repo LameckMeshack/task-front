@@ -7,6 +7,7 @@ const store = createStore({
     isAuthenticated: false,
     user: null,
     assignedTasks: null,
+    unAssignedTasks: null,
   },
 
   mutations: {
@@ -29,6 +30,9 @@ const store = createStore({
     SET_ASSIGNED_TASK(state, tasks) {
       state.assignedTasks = [...tasks];
     },
+    SET_UNASSIGNED_TASK(state, tasks) {
+      state.unAssignedTasks = [...tasks];
+    },
   },
   actions: {
     toggleSidebar(context) {
@@ -49,7 +53,18 @@ const store = createStore({
         const response = await TaskService.getAssignedTasks();
         const tasks = response.data.data;
         commit("SET_ASSIGNED_TASK", tasks);
-        console.log(this.state.assignedTasks,"Commit succesfull")
+        console.log(this.state.assignedTasks, "Commit succesfull");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async getUnAssignedTasks({ commit }) {
+      try {
+        const response = await TaskService.getAll();
+        const tasks = response.data.data;
+        commit("SET_UNASSIGNED_TASK", tasks);
+        console.log(this.state.unAssignedTasks, "Commit succesfull");
       } catch (error) {
         console.error(error);
       }
@@ -59,6 +74,9 @@ const store = createStore({
   getters: {
     assignedTasks(state) {
       return state.assignedTasks;
+    },
+    unAssignedTasks(state) {
+      return state.unAssignedTasks;
     },
     sideBarOpen: (state) => {
       return state.sideBarOpen;
