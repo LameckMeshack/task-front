@@ -1,4 +1,5 @@
 <template>
+   <h1 class="text-2xl mx-auto">Create Task</h1>
   <form>
     <div class="mb-4 mx-auto px-2 w-6/12">
       <label class="block mb-1 text-sm" for="input2">Task Name</label>
