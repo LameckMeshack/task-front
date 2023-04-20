@@ -104,7 +104,6 @@
               d="M17.431,2.156h-3.715c-0.228,0-0.413,0.186-0.413,0.413v6.973h-2.89V6.687c0-0.229-0.186-0.413-0.413-0.413H6.285c-0.228,0-0.413,0.184-0.413,0.413v6.388H2.569c-0.227,0-0.413,0.187-0.413,0.413v3.942c0,0.228,0.186,0.413,0.413,0.413h14.862c0.228,0,0.413-0.186,0.413-0.413V2.569C17.844,2.342,17.658,2.156,17.431,2.156 M5.872,17.019h-2.89v-3.117h2.89V17.019zM9.587,17.019h-2.89V7.1h2.89V17.019z M13.303,17.019h-2.89v-6.651h2.89V17.019z M17.019,17.019h-2.891V2.982h2.891V17.019z"
             ></path>
           </svg>
-
           <div class="text-gray-700">
             <p class="font-semibold text-3xl">80%</p>
             <p>Task Completion</p>
@@ -112,78 +111,11 @@
         </div>
       </div>
     </div>
-
     <Tasks />
-
-    <!-- <div class="flex flex-wrap -mx-3">
-      <div class="w-full xl:w-1/3 px-3">
-        <p class="text-xl font-semibold mb-4">Recent Sales</p>
-
-        <div class="w-full bg-white border rounded-lg p-4 mb-8 xl:mb-0">
-          <canvas id="buyers-chart" width="600" height="400"></canvas>
-        </div>
-      </div>
-
-      <div class="w-full xl:w-1/3 px-3">
-        <p class="text-xl font-semibold mb-4">Recent Reviews</p>
-
-        <div class="w-full bg-white border rounded-lg p-4 mb-8 xl:mb-0">
-          <canvas id="reviews-chart" width="600" height="400"></canvas>
-        </div>
-      </div>
-
-      <div class="w-full xl:w-1/3 px-3">
-        <p class="text-xl font-semibold mb-4">Recent Transactions</p>
-        <div class="w-full bg-white border rounded-lg p-4">
-          <div
-            class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4"
-          >
-            <div>
-              <p class="font-semibold text-xl">Trent Murphy</p>
-              <p>Product 1</p>
-            </div>
-            <span class="text-green-500 font-semibold text-lg">$25.00</span>
-          </div>
-
-          <div
-            class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4"
-          >
-            <div>
-              <p class="font-semibold text-xl">Joseph Brent</p>
-              <p>Product 34</p>
-            </div>
-            <span class="text-red-500 font-semibold text-lg">$74.99</span>
-          </div>
-
-          <div
-            class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4"
-          >
-            <div>
-              <p class="font-semibold text-xl">Jacob Bator</p>
-              <p>Product 23</p>
-            </div>
-            <span class="text-green-500 font-semibold text-lg">$14.95</span>
-          </div>
-
-          <div
-            class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2"
-          >
-            <div>
-              <p class="font-semibold text-xl">Alex Mason</p>
-              <p>Product 66</p>
-            </div>
-            <span class="text-green-500 font-semibold text-lg">$44.99</span>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
-
 <script>
-import Chart from "chart.js/auto";
 import Tasks from "../components/Tasks.vue";
-
 export default {
   name: "DashboardHome",
   components: {
@@ -191,96 +123,12 @@ export default {
   },
   data() {
     return {
-      buyersData: {
-        type: "line",
-        data: {
-          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-          datasets: [
-            {
-              backgroundColor: "rgba(99,179,237,0.4)",
-              strokeColor: "#63b3ed",
-              pointColor: "#fff",
-              pointStrokeColor: "#63b3ed",
-              data: [203, 156, 99, 251, 305, 247, 256],
-            },
-            {
-              backgroundColor: "rgba(198,198,198,0.4)",
-              strokeColor: "#f7fafc",
-              pointColor: "#fff",
-              pointStrokeColor: "#f7fafc",
-              data: [86, 97, 144, 114, 94, 108, 156],
-            },
-          ],
-        },
-        options: {
-          legend: {
-            display: false,
-          },
-          scales: {
-            yAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-                ticks: {
-                  display: false,
-                },
-              },
-            ],
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-              },
-            ],
-          },
-        },
-      },
-      reviewsData: {
-        type: "bar",
-        data: {
-          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-          datasets: [
-            {
-              backgroundColor: "rgba(99,179,237,0.4)",
-              strokeColor: "#63b3ed",
-              pointColor: "#fff",
-              pointStrokeColor: "#63b3ed",
-              data: [203, 156, 99, 251, 305, 247, 256],
-            },
-          ],
-        },
-        options: {
-          legend: {
-            display: false,
-          },
-          scales: {
-            yAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-                ticks: {
-                  display: false,
-                },
-              },
-            ],
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-              },
-            ],
-          },
-        },
-      },
+      tasks: [],
     };
   },
-  mounted() {
-    new Chart(document.getElementById("buyers-chart"), this.buyersData);
-    new Chart(document.getElementById("reviews-chart"), this.reviewsData);
+  created() {
+    this.$store.dispatch("getAssignedTasks");
+    this.$store.dispatch("getUnAssignedTasks");
   },
 };
 </script>
