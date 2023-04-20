@@ -127,7 +127,13 @@ export default {
         this.success = true;
         this.error = false;
         this.msg = res.data.message;
-        // this.$router.push("/dashboard");
+        //reset form
+        this.task = {
+          name: "",
+          description: "",
+          status_id: "",
+          due_date: "",
+        };
       } catch (error) {
         this.error = true;
         this.msg = "Something went wrong";
