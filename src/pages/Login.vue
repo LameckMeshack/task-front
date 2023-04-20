@@ -54,18 +54,36 @@
           >
           <div class="mt-6">
             <button
+              v-if="login"
               class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
             >
               Login
             </button>
+            <button
+              v-else
+              class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            >
+              Register
+            </button>
           </div>
         </div>
       </Form>
-      <p class="mt-8 text-xs font-light text-center text-gray-700">
+      <p
+        v-if="login"
+        @click="login = !login"
+        class="mt-8 text-xs font-light text-center text-gray-700"
+      >
         Don't have an account?
-        <a href="#" class="font-medium text-blue-600 hover:underline"
-          >Sign up</a
+        <span class="font-medium text-blue-600 hover:underline">Sign up</span>
+      </p>
+      <p v-else class="mt-8 text-xs font-light text-center text-gray-700">
+        Already have an account?
+        <button
+          @click="login = !login"
+          class="font-medium text-blue-600 hover:underline"
         >
+          Sign In
+        </button>
       </p>
     </div>
   </div>
@@ -84,6 +102,7 @@ export default {
   },
   data() {
     return {
+      login: false,
       msg: "",
       error: false,
       loginData: {
@@ -124,8 +143,12 @@ export default {
         //chnge email property in values to email_address
         values.email_address = values.email;
         delete values.email;
-
-        const res = await AuthServices.login(values);
+        let res;
+        if (this.login) {
+          res = await AuthServices.login(values);
+        } else {
+          res = await AuthServices.register(values);
+        }
         //storw token in local storage
         localStorage.setItem("token", res.data.data.token);
         this.$store.commit("login", values.email_address);
@@ -133,7 +156,7 @@ export default {
         this.$router.push("/");
       } catch (error) {
         this.error = true;
-        this.msg = error.response.data.message;
+        this.msg = Object.values(error.response.data.data)[0][0];
       }
     },
   },
