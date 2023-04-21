@@ -83,7 +83,9 @@
             >
               <th class="px-4 py-3">Task</th>
               <th v-if="!unassign" class="px-4 py-3">Asigned to</th>
+              <th v-if="!unassign" class="px-4 py-3">Start Date</th>
               <th class="px-4 py-3">Due Date</th>
+              <th v-if="!unassign" class="px-4 py-3">End Date</th>
               <th class="px-4 py-3">Status</th>
               <th class="px-4 py-3">Action</th>
             </tr>
@@ -147,11 +149,25 @@
                   </div>
                 </div>
               </td>
-              <td class="px-4 py-4 items-center">
+              <td v-if="!unassign" class="px-4 w-36 py-4 items-center">
+                <button
+                  class="px-2 py-2 bg-red-100 dark:bg-gray-300 rounded text-gray-500 dark:text-gray-600 text-xs font-medium"
+                >
+                  {{ formatDate(task.start_time) }}
+                </button>
+              </td>
+              <td class="px-4 py-4 w-36 items-center">
                 <button
                   class="px-2 py-2 bg-red-100 dark:bg-gray-300 rounded text-gray-500 dark:text-gray-600 text-xs font-medium"
                 >
                   {{ formatDate(task.due_date) }}
+                </button>
+              </td>
+              <td v-if="!unassign" class="px-4 w-36 py-4 items-center">
+                <button
+                  class="px-2 py-2 bg-red-100 dark:bg-gray-300 rounded text-gray-500 dark:text-gray-600 text-xs font-medium"
+                >
+                  {{ formatDate(task.end_time) }}
                 </button>
               </td>
               <td class="items-center px-4 py-4">
@@ -163,7 +179,7 @@
               </td>
               <td v-if="!unassign" class="px-4 py-4">
                 <div
-                  class="flex-col lg:flex-row lg:space-x-2 md:text-left text-center items-center space-y-2 lg:space-y-0"
+                  class="flex-col w-24 lg:flex-row lg:space-x-2 md:text-left text-center items-center space-y-2 lg:space-y-0"
                 >
                   <button
                     @click="updateUserTask(task)"
@@ -207,7 +223,7 @@
               </td>
               <td v-else class="px-4 py-4">
                 <div
-                  class="flex-col lg:flex-row lg:space-x-2 md:text-left text-center items-center space-y-2 lg:space-y-0"
+                  class="flex-col w-36 lg:flex-row lg:space-x-2 md:text-left text-center items-center space-y-2 lg:space-y-0"
                 >
                   <button
                     @click="assignTask(task)"
@@ -335,6 +351,10 @@ export default {
         this.$store.dispatch("getAssignedTasks");
       });
     },
+  },
+  created() {
+    this.$store.dispatch("getAssignedTasks");
+    this.$store.dispatch("getUnAssignedTasks");
   },
 
   watch: {
