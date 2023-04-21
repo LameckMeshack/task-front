@@ -37,6 +37,9 @@ const store = createStore({
     SET_EDIT_DATA(state, task) {
       state.editData = task;
     },
+    SET_EDIT_USER_TASK_DATA(state, task) {
+      state.editData = task;
+    }
   },
   actions: {
     toggleSidebar(context) {
@@ -78,6 +81,9 @@ const store = createStore({
 
     updateTask({ commit }, task) {
       commit("SET_EDIT_DATA", task);
+    },
+    updateUserTask({ commit }, task) {
+      commit("SET_EDIT_USER_TASK_DATA", task);
     },
   },
 

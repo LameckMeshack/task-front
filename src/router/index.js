@@ -5,6 +5,7 @@ const DashboardHome = () => import("@/pages/Home");
 const Graph = () => import("@/pages/Graphs");
 const CreateTask = () => import("@/pages/CreateTask");
 const UpdateTask = () => import("@/pages/UpdateTask");
+const UpdateUserTask = () => import("@/pages/UpdateUserTask");
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
@@ -25,6 +26,12 @@ const routes = [
         path: "task/:id/edit",
         name: "edit-task",
         component: UpdateTask,
+        props: true,
+      },
+      {
+        path: "user-task/:id/edit",
+        name: "edit-user-task",
+        component: UpdateUserTask,
         props: true,
       },
     ],

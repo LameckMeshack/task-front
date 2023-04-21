@@ -165,6 +165,7 @@
                   class="flex-col lg:flex-row lg:space-x-2 md:text-left text-center items-center space-y-2 lg:space-y-0"
                 >
                   <button
+                    @click="updateUserTask(task)"
                     class="items-center px-2 py-2 text-white bg-blue-500 dark:bg-gray-500 rounded-md hover:bg-blue-600 dark:hover:bg-gray-600 focus:outline-none"
                   >
                     <svg
@@ -274,8 +275,15 @@ export default {
         props: { task },
       });
       //action to update task
-
       this.$store.dispatch("updateTask", task);
+    },
+    updateUserTask(task) {
+      router.push({
+        name: "edit-user-task",
+        params: { id: task.id },
+        props: { task },
+      });
+      this.$store.dispatch("updateUserTask", task);
     },
   },
 

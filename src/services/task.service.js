@@ -5,10 +5,6 @@ const getAll = () => {
   return http.get("/tasks", { headers: authHeader() });
 };
 
-const getAssignedTasks = () => {
-  return http.get("/usertasks", { headers: authHeader() });
-};
-
 const get = (id) => {
   return http.get(`/tasks/${id}`, { headers: authHeader() });
 };
@@ -29,9 +25,23 @@ const removeAll = () => {
   return http.delete(`/tasks`, { headers: authHeader() });
 };
 
+const getAssignedTasks = () => {
+  return http.get("/usertasks", { headers: authHeader() });
+};
+
+const updateAssignedTasks = (id, data) => {
+  return http.put(`/usertasks/${id}`, data, { headers: authHeader() });
+};
+
+//delete
+const deleteAssignedTasks = (id) => {
+  return http.delete(`/usertasks/${id}`, { headers: authHeader() });
+};
 const TaskService = {
   getAll,
   getAssignedTasks,
+  updateAssignedTasks,
+  deleteAssignedTasks,
   get,
   create,
   update,
