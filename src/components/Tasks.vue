@@ -9,69 +9,69 @@
       >
         <li class="md:inline-flex group rounded w-full">
           <div
-            class="md:visible invisible flex w-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
+            class="md:visible invisible flex w-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
           ></div>
           <p
-            class="flex p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-white"
-            href="#"
+            class="flex p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white"
+            
           >
             My tasks
           </p>
           <div
-            class="md:invisible flex h-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
+            class="md:invisible flex h-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
           ></div>
         </li>
         <li class="md:inline-flex group rounded w-full">
           <div
-            class="flex w-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
+            class="flex w-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
           ></div>
           <p
             @click="(tasks = assignedTasks), (unassign = false)"
-            class="block p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-white"
-            href="#"
+            class="block p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white"
+            
           >
             Assigned tasks
           </p>
           <div
-            class="md:invisible flex h-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
+            class="md:invisible flex h-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
           ></div>
         </li>
         <li class="md:inline-flex group rounded w-full">
           <div
-            class="md:visible invisible flex w-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
+            class="md:visible invisible flex w-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
           ></div>
           <p
             @click="(tasks = unAssignedTasksLocal), (unassign = true)"
-            class="flex p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-white"
-            href="#"
+            class="flex p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white"
+            
           >
             Unassigned tasks
           </p>
           <div
-            class="md:invisible flex h-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
+            class="md:invisible flex h-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
           ></div>
         </li>
         <li class="md:inline-flex group rounded w-full">
           <div
-            class="flex w-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
+            class="flex w-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
           ></div>
           <p
-            class="block p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-white"
-            href="#"
+            class="block p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white"
+            
           >
             Due today
           </p>
           <div
-            class="md:invisible flex h-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
+            class="md:invisible flex h-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
           ></div>
         </li>
         <li class="md:inline-flex group rounded w-full">
           <div
-            class="flex w-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
+            class="flex w-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
           ></div>
 
           <div
-            class="md:invisible flex h-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
+            class="md:invisible flex h-1 group-hover:bg-blue-500 dark:group-hover:bg-white scale-x-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-500 ease-out"
           ></div>
         </li>
       </ul>
@@ -100,7 +100,7 @@
                 <div class="flex">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-8 h-8 md:h-5 md:w-5 mr-2 text-green-500 dark:text-gray-200 group-hover:text-green-600 dark:group-hover:text-gray-700"
+                    class="w-8 h-8 md:h-5 md:w-5 mr-2 text-blue-500 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-gray-700"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -111,7 +111,7 @@
                     />
                   </svg>
                   <div
-                    class="flex text-sm group-hover:text-green-500 dark:text-gray-200 dark:group-hover:text-gray-600"
+                    class="flex text-sm group-hover:text-blue-500 dark:text-gray-200 dark:group-hover:text-gray-600"
                   >
                     <div v-if="!unassign">
                       <p>{{ task.task }}</p>
@@ -132,13 +132,13 @@
               <td v-if="!unassign" class="items-center px-4 py-4">
                 <div class="flex flex-row items-center">
                   <div class="flex w-8 h-8 mr-2">
-                    <a href="#" class="relative block">
+                    <div  class="relative block">
                       <img
                         alt="profil"
                         src="https://images.unsplash.com/photo-1644424232401-a93a1405d902?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODJ8fHdvbWVuJTIwZmFjZXxlbnwwfHwyfHw%3D&auto=format&fit=crop&w=500&q=60"
                         class="object-cover w-8 h-8 mx-auto rounded-full"
                       />
-                    </a>
+                    </div>
                   </div>
                   <div class="flex-1 pl-1">
                     <div
