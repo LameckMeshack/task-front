@@ -1,5 +1,6 @@
 <template>
   <div
+    :key="load"
     class="items-center w-full px-4 py-4 rounded-md mx-auto my-10 bg-white dark:bg-gray-800 shadow-md sm:w-11/12 overflow-auto"
   >
     <div class="flex flex-col md:flex-row">
@@ -25,7 +26,7 @@
             class="flex w-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
           ></div>
           <p
-            @click="(tasks = assignedTasks), (unassign = !unassign)"
+            @click="(tasks = assignedTasks), (unassign = false)"
             class="block p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-white"
             href="#"
           >
@@ -40,7 +41,7 @@
             class="md:visible invisible flex w-1 group-hover:bg-green-500 dark:group-hover:bg-white scale-y-0 group-hover:scale-100 transition-transform origin-top rounded-full duration-400 ease-in"
           ></div>
           <p
-            @click="(tasks = unAssignedTasks), (unassign = !unassign)"
+            @click="(tasks = unAssignedTasksLocal), (unassign = true)"
             class="flex p-2 text-sm md:text-base font-semibold text-gray-500 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-white"
             href="#"
           >
@@ -184,6 +185,7 @@
                   </button>
 
                   <button
+                    @click="deleteUserTask(task.id)"
                     class="items-center px-2 py-2 text-white bg-red-500 dark:bg-gray-500 rounded-md hover:bg-red-600 dark:hover:bg-gray-600 focus:outline-none"
                   >
                     <svg
@@ -205,10 +207,10 @@
               </td>
               <td v-else class="px-4 py-4">
                 <div
-                  @click="updateTask(task)"
                   class="flex-col lg:flex-row lg:space-x-2 md:text-left text-center items-center space-y-2 lg:space-y-0"
                 >
                   <button
+                    @click="updateTask(task)"
                     class="items-center px-2 py-2 text-white bg-blue-500 dark:bg-gray-500 rounded-md hover:bg-blue-600 dark:hover:bg-gray-600 focus:outline-none"
                   >
                     <svg
@@ -227,6 +229,7 @@
                   </button>
 
                   <button
+                    @click="deleteTask(task.id)"
                     class="items-center px-2 py-2 text-white bg-red-500 dark:bg-gray-500 rounded-md hover:bg-red-600 dark:hover:bg-gray-600 focus:outline-none"
                   >
                     <svg
@@ -256,18 +259,24 @@
 <script>
 import router from "@/router";
 import { mapGetters } from "vuex";
+import TaskService from "@/services/task.service";
 export default {
   name: "TaskTable",
   data() {
     return {
       tasks: [],
       unassign: false,
+      unAssignedTasksLocal: [],
+      load: 0,
     };
   },
   computed: {
     ...mapGetters(["assignedTasks", "unAssignedTasks"]),
   },
   methods: {
+    forceRealod() {
+      this.load = +1;
+    },
     updateTask(task) {
       router.push({
         name: "edit-task",
@@ -277,6 +286,14 @@ export default {
       //action to update task
       this.$store.dispatch("updateTask", task);
     },
+    // delete task
+    deleteTask(id) {
+      TaskService.remove(id).then((response) => {
+        alert(response.data.message);
+        this.$store.dispatch("getUnAssignedTasks");
+        this.forceRealod();
+      });
+    },
     updateUserTask(task) {
       router.push({
         name: "edit-user-task",
@@ -285,11 +302,21 @@ export default {
       });
       this.$store.dispatch("updateUserTask", task);
     },
+    // delete user task
+    deleteUserTask(id) {
+      TaskService.deleteAssignedTasks(id).then((response) => {
+        alert(response.data.message);
+        this.$store.dispatch("getAssignedTasks");
+      });
+    },
   },
 
   watch: {
     assignedTasks(newTasks) {
       this.tasks = newTasks;
+    },
+    unAssignedTasks(newTasks) {
+      this.unAssignedTasksLocal = newTasks;
     },
   },
 };

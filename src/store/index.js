@@ -39,7 +39,7 @@ const store = createStore({
     },
     SET_EDIT_USER_TASK_DATA(state, task) {
       state.editData = task;
-    }
+    },
   },
   actions: {
     toggleSidebar(context) {
@@ -60,7 +60,7 @@ const store = createStore({
         const response = await TaskService.getAssignedTasks();
         const tasks = response.data.data;
         commit("SET_ASSIGNED_TASK", tasks);
-        console.log(this.state.assignedTasks, "Commit succesfull");
+        // console.log(this.state.assignedTasks, "Commit succesfull");
       } catch (error) {
         console.error(error);
       }
@@ -84,6 +84,19 @@ const store = createStore({
     },
     updateUserTask({ commit }, task) {
       commit("SET_EDIT_USER_TASK_DATA", task);
+    },
+
+    // remove the task
+    async deleteTask({ commit, state }, id) {
+      try {
+        await TaskService.remove(id);
+        const tasks = state.unAssignedTasks.filter((task) => task.id !== id);
+        commit("SET_UNASSIGNED_TASK", tasks);
+        alert("Task delete");
+      } catch (error) {
+        console.error(error);
+        alert("Task delete failed");
+      }
     },
   },
 

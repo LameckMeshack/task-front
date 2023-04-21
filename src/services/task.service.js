@@ -32,16 +32,23 @@ const getAssignedTasks = () => {
 const updateAssignedTasks = (id, data) => {
   return http.put(`/usertasks/${id}`, data, { headers: authHeader() });
 };
+//create user task
+const createUserTask = (data) => {
+  return http.post("/usertasks", data, { headers: authHeader() });
+};
 
 //delete
 const deleteAssignedTasks = (id) => {
   return http.delete(`/usertasks/${id}`, { headers: authHeader() });
 };
+
+
 const TaskService = {
-  getAll,
   getAssignedTasks,
   updateAssignedTasks,
   deleteAssignedTasks,
+  createUserTask,
+  getAll,
   get,
   create,
   update,
