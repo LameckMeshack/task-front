@@ -6,6 +6,7 @@ const Graph = () => import("@/pages/Graphs");
 const CreateTask = () => import("@/pages/CreateTask");
 const UpdateTask = () => import("@/pages/UpdateTask");
 const UpdateUserTask = () => import("@/pages/UpdateUserTask");
+const AssignTask = () => import("@/pages/AssignTask");
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
@@ -32,6 +33,12 @@ const routes = [
         path: "user-task/:id/edit",
         name: "edit-user-task",
         component: UpdateUserTask,
+        props: true,
+      },
+      {
+        path: "assign-task/:id/:name",
+        name: "assign-user-task",
+        component: AssignTask,
         props: true,
       },
     ],

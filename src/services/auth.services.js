@@ -19,11 +19,15 @@ const register = (regData) => {
 const getUser = () => {
   return http.get("/user", { headers: authHeader() });
 };
+const getAllUsers = () => {
+  return http.get("/users", { headers: authHeader() });
+};
 
 const AuthServices = {
   login,
   register,
   getUser,
   logout,
+  getAllUsers,
 };
 export default AuthServices;

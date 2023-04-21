@@ -1,31 +1,46 @@
 <template>
-  <h1 class="text-2xl mx-auto">Assign To Update</h1>
+  <h1 class="text-2xl mx-auto">Assign Task To User</h1>
 
   <form>
     <div class="mb-4 flex mx-auto px-2 w-6/12">
       <div class="w-2/3 mr-1">
-        <label class="block mb-1 text-sm" for="input2">Task Name</label>
+        <label class="block mb-1 text-sm" for="task">Task Name</label>
 
         <input
           v-model="taskEdit.task"
           disabled
-          id="input2"
+          id="task"
           class="w-full border px-4 py-2 rounded focus:border focus:border-blue-500 focus:shadow-outline outline-none cursor-not-allowed"
           type="text"
-          placeholder="Input placeholder..."
         />
       </div>
       <div class="w-1/3">
-        <label class="block mb-1 text-sm" for="input2">Task Name</label>
+        <label class="block mb-1 text-sm" for="user">User</label>
+        <div class="relative">
+          <select
+            class="w-full border bg-white px-4 pr-8 py-2 rounded focus:border-blue-200 focus:shadow-outline outline-none appearance-none"
+            id="user"
+            v-model="taskEdit.user_id"
+          >
+            <option v-for="user in users" :key="user.id" :value="user.id">
+              {{ user.email_address }}
+            </option>
+          </select>
 
-        <input
-          v-model="taskEdit.user"
-          disabled
-          id="input2"
-          class="w-full border px-4 py-2 rounded focus:border cursor-not-allowed focus:border-blue-500 focus:shadow-outline outline-none"
-          type="text"
-          placeholder="Input placeholder..."
-        />
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+          >
+            <svg
+              class="fill-current h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
     <div class="mb-4 flex mx-auto px-2 w-6/12">
@@ -109,7 +124,7 @@
         class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         type="button"
       >
-        Update User Task
+        Assign Task
       </button>
     </div>
   </form>
@@ -130,7 +145,8 @@ import "@vuepic/vue-datepicker/dist/main.css";
 import TaskServices from "../services/task.service";
 import Success from "@/components/Success.vue";
 import Error from "@/components/Error.vue";
-import { mapState } from "vuex";
+import AuthServices from "@/services/auth.services";
+
 export default {
   name: "ContactForm",
   components: { VueDatePicker, Success, Error },
@@ -141,14 +157,16 @@ export default {
       success: false,
       error: false,
       msg: "",
+      users: [],
       taskEdit: {
-        description: "",
+        task: this.$route.params.name,
         status_id: "",
         end_time: "",
         start_time: "",
         remark: "",
         due_date: "",
-        user: "",
+        user_id: "",
+        task_id: this.$route.params.id,
       },
     };
   },
@@ -183,7 +201,7 @@ export default {
           .replace("T", " ")
           .slice(0, -5);
         console.log(this.taskEdit);
-        const res = await TaskServices.updateAssignedTasks(this.taskEdit.id, {
+        const res = await TaskServices.createUserTask({
           ...this.taskEdit,
         });
         this.success = true;
@@ -199,17 +217,15 @@ export default {
         }
       }
     },
-  },
-
-  computed: {
-    ...mapState(["editData"]),
-    formData() {
-      return this.editData ? { ...this.editData } : {};
+    async getUsers() {
+      const res = await AuthServices.getAllUsers();
+      this.users = res.data.data;
+      console.log(this.users);
     },
   },
+
   created() {
-    // assign the form data from the edit data
-    this.taskEdit = this.formData;
+    this.getUsers();
   },
 };
 </script>

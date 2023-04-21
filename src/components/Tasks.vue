@@ -210,6 +210,25 @@
                   class="flex-col lg:flex-row lg:space-x-2 md:text-left text-center items-center space-y-2 lg:space-y-0"
                 >
                   <button
+                    @click="assignTask(task)"
+                    class="items-center px-2 py-2 text-white bg-red-500 dark:bg-gray-500 rounded-md hover:bg-red-600 dark:hover:bg-gray-600 focus:outline-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                      />
+                    </svg>
+                  </button>
+                  <button
                     @click="updateTask(task)"
                     class="items-center px-2 py-2 text-white bg-blue-500 dark:bg-gray-500 rounded-md hover:bg-blue-600 dark:hover:bg-gray-600 focus:outline-none"
                   >
@@ -276,6 +295,13 @@ export default {
   methods: {
     forceRealod() {
       this.load = +1;
+    },
+    assignTask(task) {
+      router.push({
+        name: "assign-user-task",
+        params: { id: task.id, name: task.name },
+        props: { task },
+      });
     },
     updateTask(task) {
       router.push({
